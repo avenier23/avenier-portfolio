@@ -59,4 +59,4 @@ Contact & socials: Email avenierarellano06@gmail.com · WhatsApp +63 995 497 367
 
 Résumé: visitors can download Avenier's full résumé (PDF) from the "Résumé" button in the top navigation or the "Download my résumé" button in the About section.
 
-How to start: book a free 30-minute discovery call through the "Book a call" form on this page (pick a date and time slot), or email avenierarellano06@gmail.com. Avenier replies within 24 hours. Engagements can be part-time, full-time or per project, and Avenier is happy to sign an NDA.`
+How to start: book a free 30-minute "Client Strategy Meeting" on Zoom through the Calendly scheduler in the "Book a call" section (the Zoom link is emailed instantly). Agenda: get to know the business (5 min), goals & challenges (10 min), action plan (10 min), next steps (5 min). Alternatively send a request through the form, WhatsApp, or email avenierarellano06@gmail.com. Avenier replies within 24 hours. Engagements can be part-time, full-time or per project, and Avenier is happy to sign an NDA.`

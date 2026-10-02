@@ -1,9 +1,10 @@
 import { useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { CalendarDays, CheckCircle2, Clock, Loader2, Mail, Send } from 'lucide-react'
+import { CalendarDays, CheckCircle2, ListChecks, Loader2, Mail, Send, Video } from 'lucide-react'
 import Reveal from './Reveal'
 import SocialIcon from './SocialIcons'
-import { bookingServices, profile, socials, timeSlots } from '../data/content'
+import CalendlyEmbed from './CalendlyEmbed'
+import { bookingServices, meeting, profile, socials, timeSlots } from '../data/content'
 import './Booking.css'
 
 // Optional: set VITE_WEB3FORMS_KEY in .env to deliver bookings straight to the inbox via web3forms.com.
@@ -46,6 +47,7 @@ export default function Booking() {
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [tab, setTab] = useState('calendar') // calendar | form
   const summaryRef = useRef(null)
   const minDate = useMemo(() => todayISO(), [])
 
@@ -119,21 +121,38 @@ export default function Booking() {
             Let’s talk about <span className="gradient-text">your next big move</span>
           </h2>
           <p className="lead">
-            Pick a time that suits you for a free 30-minute discovery call. We’ll map out where I can save you the
-            most time and what results to aim for.
+            Book a free {meeting.duration} <strong>{meeting.name}</strong> on {meeting.platform}. Pick a time that
+            suits you and you’ll get a confirmation email with the meeting link right away.
           </p>
 
           <ul className="booking__expect">
             <li>
-              <CalendarDays size={18} aria-hidden="true" /> Free 30-minute discovery call
+              <CalendarDays size={18} aria-hidden="true" /> Free, {meeting.duration}, shown in your time zone
             </li>
             <li>
-              <Clock size={18} aria-hidden="true" /> I reply within 24 hours to confirm
+              <Video size={18} aria-hidden="true" /> {meeting.platform} link sent automatically
             </li>
             <li>
-              <CheckCircle2 size={18} aria-hidden="true" /> Clear proposal, no obligation
+              <CheckCircle2 size={18} aria-hidden="true" /> Clear proposal within 24 hours, no obligation
             </li>
           </ul>
+
+          <div className="agenda card">
+            <h3 className="agenda__title">
+              <ListChecks size={18} aria-hidden="true" /> Meeting agenda
+            </h3>
+            <ol className="agenda__list">
+              {meeting.agenda.map((a) => (
+                <li key={a.title}>
+                  <span className="agenda__time">{a.time}</span>
+                  <span>
+                    <strong>{a.title}</strong>
+                    <span className="agenda__text">{a.text}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           <p className="booking__alt">Prefer to message directly?</p>
           <div className="booking__contact">
@@ -158,6 +177,37 @@ export default function Booking() {
         </Reveal>
 
         <Reveal delay={0.08} className="booking__panel card">
+          <div className="booking__tabs" role="tablist" aria-label="How would you like to book?">
+            <button
+              role="tab"
+              id="tab-calendar"
+              aria-selected={tab === 'calendar'}
+              aria-controls="panel-calendar"
+              className={tab === 'calendar' ? 'is-active' : ''}
+              onClick={() => setTab('calendar')}
+            >
+              <CalendarDays size={16} aria-hidden="true" /> Pick a time
+            </button>
+            <button
+              role="tab"
+              id="tab-form"
+              aria-selected={tab === 'form'}
+              aria-controls="panel-form"
+              className={tab === 'form' ? 'is-active' : ''}
+              onClick={() => setTab('form')}
+            >
+              <Send size={15} aria-hidden="true" /> Send a request
+            </button>
+          </div>
+
+          <div role="tabpanel" id="panel-calendar" aria-labelledby="tab-calendar" hidden={tab !== 'calendar'}>
+            <CalendlyEmbed url={meeting.calendly} />
+          </div>
+
+          <div role="tabpanel" id="panel-form" aria-labelledby="tab-form" hidden={tab !== 'form'}>
+          <p className="booking__form-note">
+            None of the times work for you? Send your preferred slot and I’ll confirm by email.
+          </p>
           <AnimatePresence mode="wait">
             {status === 'sent' ? (
               <motion.div
@@ -332,6 +382,7 @@ export default function Booking() {
               </motion.form>
             )}
           </AnimatePresence>
+          </div>
         </Reveal>
       </div>
     </section>

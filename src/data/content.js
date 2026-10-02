@@ -217,6 +217,19 @@ export const certifications = [
 
 export const extraCredentials = ['Civil Service Eligibility, Civil Service Commission (2026)']
 
+export const meeting = {
+  name: 'Client Strategy Meeting',
+  duration: '30 min',
+  platform: 'Zoom',
+  calendly: 'https://calendly.com/avenierarellano06/client-strategy-meeting',
+  agenda: [
+    { time: '0–5 min', title: 'Get to know you', text: 'Your business, brand, audience and how things run today.' },
+    { time: '5–15 min', title: 'Goals & challenges', text: 'What’s eating your time, what’s not working, and what success looks like.' },
+    { time: '15–25 min', title: 'Action plan', text: 'Where I can help across operations, creatives, content and admin, plus quick wins you can use right away.' },
+    { time: '25–30 min', title: 'Next steps', text: 'Scope, timeline and how we’d work together. You get a clear proposal within 24 hours.' },
+  ],
+}
+
 export const bookingServices = [
   'E-commerce operations',
   'Ad creatives & UGC',
@@ -232,7 +245,7 @@ export const timeSlots = ['9:00 AM', '11:00 AM', '1:00 PM', '3:00 PM', '5:00 PM'
 export const faqs = [
   {
     q: 'What do I need to get started?',
-    a: 'Just book a call. We’ll go over your goals, current workload and tools, and I’ll suggest where I can take the most off your plate first.',
+    a: 'Just book a free 30-minute Client Strategy Meeting on Zoom. We’ll go over your goals, current workload and tools, and I’ll suggest where I can take the most off your plate first. You’ll get a clear proposal within 24 hours.',
   },
   {
     q: 'Which time zones can you work in?',

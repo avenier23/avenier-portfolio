@@ -173,7 +173,7 @@ export default function ChatWidget() {
             </div>
 
             <a href="#book" className="chat__book" onClick={close}>
-              <CalendarDays size={16} aria-hidden="true" /> Book a free discovery call
+              <CalendarDays size={16} aria-hidden="true" /> Book a free strategy meeting
             </a>
 
             <form

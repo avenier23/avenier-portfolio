@@ -78,6 +78,162 @@
   box-shadow: 0 40px 100px -50px var(--glow);
 }
 
+/* Tabs: Calendly scheduler vs. request form */
+.booking__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 5px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(5, 11, 26, 0.5);
+}
+.booking__tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14.5px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+.booking__tabs button:hover {
+  color: var(--text);
+}
+.booking__tabs button.is-active {
+  background: linear-gradient(180deg, #4f8bff, var(--blue-deep));
+  color: #fff;
+  box-shadow: 0 8px 24px -12px var(--glow);
+}
+.booking__form-note {
+  margin-bottom: 18px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+
+/* Calendly: free plan renders its own light theme, so it sits in a soft white frame */
+.calendly {
+  position: relative;
+}
+.calendly__frame {
+  height: 700px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+.calendly__frame iframe {
+  display: block;
+}
+.calendly__status {
+  position: absolute;
+  inset: 0 0 32px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px;
+}
+.calendly__fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.calendly__fallback:hover {
+  color: var(--blue-bright);
+}
+
+/* Agenda */
+.agenda {
+  margin-top: 28px;
+  padding: 22px 22px 8px;
+}
+.agenda__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.agenda__title svg {
+  color: var(--cyan);
+}
+.agenda__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.agenda__list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+/* timeline line */
+.agenda__list li::before {
+  content: '';
+  position: absolute;
+  left: 86px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.agenda__list li:last-child::before {
+  display: none;
+}
+.agenda__list li > span:last-child {
+  position: relative;
+  padding-left: 14px;
+}
+.agenda__list li > span:last-child::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--blue-bright);
+  box-shadow: 0 0 10px var(--glow);
+}
+.agenda__time {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding-top: 1px;
+}
+.agenda__list strong {
+  display: block;
+  font-size: 15px;
+}
+.agenda__text {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .booking__form {
   display: grid;
   gap: 20px;
@@ -281,5 +437,21 @@
   }
   .booking__slot-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .calendly__frame {
+    height: 820px;
+  }
+  .agenda__list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .agenda__list li::before {
+    display: none;
+  }
+  .agenda__list li > span:last-child {
+    padding-left: 0;
+  }
+  .agenda__list li > span:last-child::before {
+    display: none;
   }
 }

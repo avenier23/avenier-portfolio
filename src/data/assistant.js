@@ -2,7 +2,7 @@
 // Each topic matches on keywords; the best match wins. Edit answers here like any other site copy.
 import { profile } from './content.js'
 
-const book = { label: 'Book a free call', href: '#book' }
+const book = { label: 'Book a strategy call', href: '#book' }
 const whatsapp = { label: 'WhatsApp Avenier', href: profile.whatsapp, external: true }
 const email = { label: 'Email Avenier', href: `mailto:${profile.email}`, external: true }
 
@@ -75,7 +75,7 @@ export const topics = [
     id: 'contact',
     label: 'How do I book a call?',
     keywords: ['book', 'call', 'meeting', 'contact', 'hire', 'reach', 'whatsapp', 'email', 'talk', 'start', 'interview'],
-    answer: `The fastest way is the booking form: pick a date and time for a free 30-minute call. You can also WhatsApp ${profile.whatsappDisplay} or email ${profile.email}. Avenier replies within 24 hours.`,
+    answer: `Book a free 30-minute Client Strategy Meeting on Zoom: pick any open time in the booking section and you’ll get the Zoom link by email instantly. Agenda: get to know your business → goals & challenges → action plan → next steps. You can also WhatsApp ${profile.whatsappDisplay} or email ${profile.email}.`,
     actions: [book, whatsapp, email],
   },
 ]
