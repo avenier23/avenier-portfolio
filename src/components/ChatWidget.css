@@ -138,6 +138,29 @@
   border-color: rgba(248, 113, 113, 0.4);
 }
 
+.chat__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  white-space: normal;
+}
+.chat__actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+.chat__actions a:hover {
+  background: var(--blue-deep);
+}
+
 .chat__typing {
   display: inline-flex;
   gap: 5px;

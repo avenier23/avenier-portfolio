@@ -10,7 +10,8 @@ cp .env.example .env   # then add your ANTHROPIC_API_KEY
 npm run dev            # http://localhost:5173
 ```
 
-The AI assistant needs `ANTHROPIC_API_KEY`. Without it the site still works; the chat replies with your email and booking link instead.
+The chat assistant is free by default: it answers from the topics in [`src/data/assistant.js`](src/data/assistant.js) (edit answers there).
+To switch to the Claude-powered AI assistant later, set `VITE_AI_ENABLED=true` and `ANTHROPIC_API_KEY` (in `.env` locally and in Vercel), then redeploy.
 
 ## Edit content
 

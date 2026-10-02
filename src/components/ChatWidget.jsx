@@ -2,20 +2,20 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowUp, CalendarDays, MessageCircle, Sparkles, X } from 'lucide-react'
 import { profile } from '../data/content'
+import { findAnswer, topics } from '../data/assistant'
 import './ChatWidget.css'
+
+// Set VITE_AI_ENABLED=true (plus ANTHROPIC_API_KEY on the server) to switch from instant
+// built-in answers to the Claude-powered assistant in api/chat.js.
+const AI_ENABLED = import.meta.env.VITE_AI_ENABLED === 'true'
 
 const GREETING = {
   role: 'assistant',
-  content:
-    'Hi! I’m Ave’s AI assistant. Ask me anything about Avenier’s services, results or how working together looks.',
+  content: AI_ENABLED
+    ? 'Hi! I’m Ave’s AI assistant. Ask me anything about Avenier’s services, results or how working together looks.'
+    : 'Hi! I’m Ave’s assistant. Pick a topic below or type a question about Avenier’s services, results or how to work together.',
+  showTopics: true,
 }
-
-const SUGGESTIONS = [
-  'What services does Avenier offer?',
-  'What results has Avenier delivered?',
-  'Can Avenier manage my Shopify store?',
-  'How do I book a call?',
-]
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false)
@@ -50,12 +50,28 @@ export default function ChatWidget() {
     setMessages(next)
     setInput('')
     setLoading(true)
+
+    if (!AI_ENABLED) {
+      // Short pause so the reply feels conversational rather than instant-swap.
+      const reply = findAnswer(question)
+      setTimeout(() => {
+        setMessages((m) => [
+          ...m,
+          { role: 'assistant', content: reply.answer, actions: reply.actions, showTopics: reply.showTopics },
+        ])
+        setLoading(false)
+      }, 450)
+      return
+    }
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // The greeting is UI-only; the API conversation starts with the visitor's first message.
-        body: JSON.stringify({ messages: next.filter((m) => m !== GREETING && !m.error) }),
+        body: JSON.stringify({
+          messages: next.filter((m) => m !== GREETING && !m.error).map(({ role, content }) => ({ role, content })),
+        }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.reply) throw new Error(data.error || 'unavailable')
@@ -78,7 +94,8 @@ export default function ChatWidget() {
     }
   }
 
-  const showSuggestions = messages.length === 1 && !loading
+  const close = () => setOpen(false)
+  const last = messages[messages.length - 1]
 
   return (
     <div className="chat">
@@ -88,7 +105,7 @@ export default function ChatWidget() {
             id="chat-panel"
             className="chat__panel"
             role="dialog"
-            aria-label="Chat with Ave’s AI assistant"
+            aria-label="Chat with Ave’s assistant"
             initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97, transition: { duration: 0.16 } }}
@@ -101,9 +118,9 @@ export default function ChatWidget() {
                 <span className="chat__online" />
               </span>
               <span className="chat__who">
-                <strong>Ave’s AI Assistant</strong>
+                <strong>{AI_ENABLED ? 'Ave’s AI Assistant' : 'Ave’s Assistant'}</strong>
                 <small>
-                  <Sparkles size={12} aria-hidden="true" /> Powered by Claude · usually instant
+                  <Sparkles size={12} aria-hidden="true" /> {AI_ENABLED ? 'Powered by Claude · usually instant' : 'Instant answers'}
                 </small>
               </span>
               <button
@@ -122,6 +139,19 @@ export default function ChatWidget() {
               {messages.map((m, i) => (
                 <div key={i} className={`chat__msg chat__msg--${m.role} ${m.error ? 'is-error' : ''}`}>
                   {m.content}
+                  {m.actions?.length > 0 && (
+                    <span className="chat__actions">
+                      {m.actions.map((a) => (
+                        <a
+                          key={a.label}
+                          href={a.href}
+                          {...(a.external ? { target: '_blank', rel: 'noreferrer' } : { onClick: close })}
+                        >
+                          {a.label}
+                        </a>
+                      ))}
+                    </span>
+                  )}
                 </div>
               ))}
               {loading && (
@@ -131,18 +161,18 @@ export default function ChatWidget() {
                   <span />
                 </div>
               )}
-              {showSuggestions && (
+              {!loading && last.showTopics && (
                 <div className="chat__suggestions">
-                  {SUGGESTIONS.map((s) => (
-                    <button key={s} onClick={() => ask(s)}>
-                      {s}
+                  {topics.map((t) => (
+                    <button key={t.id} onClick={() => ask(t.label)}>
+                      {t.label}
                     </button>
                   ))}
                 </div>
               )}
             </div>
 
-            <a href="#book" className="chat__book" onClick={() => setOpen(false)}>
+            <a href="#book" className="chat__book" onClick={close}>
               <CalendarDays size={16} aria-hidden="true" /> Book a free discovery call
             </a>
 
@@ -161,7 +191,7 @@ export default function ChatWidget() {
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about services, results, tools…"
+                placeholder="Ask about services, results, rates…"
                 maxLength={2000}
                 autoComplete="off"
               />
@@ -179,14 +209,14 @@ export default function ChatWidget() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="chat-panel"
-        aria-label={open ? 'Close AI assistant' : 'Open AI assistant'}
+        aria-label={open ? 'Close assistant' : 'Open assistant'}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, type: 'spring', stiffness: 200, damping: 20 }}
         whileTap={{ scale: 0.94 }}
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}
-        {!open && <span className="chat__launcher-text">Ask my AI</span>}
+        {!open && <span className="chat__launcher-text">{AI_ENABLED ? 'Ask my AI' : 'Ask me anything'}</span>}
       </motion.button>
     </div>
   )
