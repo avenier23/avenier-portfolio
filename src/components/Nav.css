@@ -1,0 +1,132 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    backdrop-filter 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.nav--scrolled {
+  background: rgba(5, 11, 26, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: var(--border);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 20px;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+.nav__logo {
+  width: auto;
+  height: 34px;
+  filter: drop-shadow(0 4px 14px var(--glow));
+}
+.nav__dot {
+  color: var(--blue-bright);
+}
+
+.nav__links {
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(12, 24, 48, 0.5);
+}
+.nav__links a {
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  font-weight: 500;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+.nav__links a:hover {
+  color: var(--text);
+}
+.nav__links a.is-active {
+  color: #fff;
+  background: rgba(59, 123, 255, 0.18);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__cta,
+.nav__resume {
+  min-height: 42px;
+  padding: 0 18px;
+}
+.nav__mobile .btn-ghost {
+  margin-top: 8px;
+}
+@media (max-width: 1080px) {
+  .nav__resume {
+    display: none;
+  }
+}
+
+.nav__toggle {
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nav__mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 16px;
+  padding: 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: rgba(8, 18, 39, 0.96);
+  backdrop-filter: blur(16px);
+}
+.nav__mobile a:not(.btn) {
+  padding: 14px 12px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.nav__mobile a:not(.btn):hover {
+  background: rgba(59, 123, 255, 0.1);
+}
+.nav__mobile .btn {
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__toggle {
+    display: grid;
+  }
+}
+@media (max-width: 420px) {
+  .nav__cta {
+    display: none;
+  }
+}
