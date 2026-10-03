@@ -11,6 +11,7 @@ export const profile = {
   whatsappDisplay: '+63 995 497 3679',
   resume: '/Avenier-Arellano-Resume.pdf',
   logo: '/media/img/ave-logo-mark.png',
+  introVideo: { src: '/media/video/ai-avenier-intro.mp4', poster: '/media/video/ai-avenier-intro.webp' },
   timezones: 'US (EST/PST) · UK (GMT) · AU (AEST)',
 }
 
@@ -162,51 +163,111 @@ export const tools = [
   'Notion', 'ClickUp', 'Asana', 'WordPress', 'Wix', 'Framer', 'ChatGPT', 'Claude Code',
 ]
 
-export const workFilters = ['All', 'Ad Creatives', 'Video & Reels', 'Social Media', 'Branding', 'Print']
+// Portfolio, organized into sections. Each item: type 'image' | 'video'.
+// Videos use a .webp poster generated from the clip; `landscape` marks wide videos; `light` puts logos on white.
+const v = (name) => ({ type: 'video', src: `/media/video/${name}.mp4`, poster: `/media/video/${name}.webp` })
+const img = (name) => ({ type: 'image', src: `/media/img/${name}.webp` })
 
-// type: 'image' | 'video'. Videos use a .webp poster generated from the clip.
-export const work = [
-  { type: 'image', category: 'Ad Creatives', title: 'Bolt 205W pre-launch ad', client: 'iBlockCube', src: '/media/img/bolt-prelaunch.webp' },
-  { type: 'video', category: 'Ad Creatives', title: 'Bolt 205W product loop', client: 'iBlockCube', src: '/media/video/bolt-loop.mp4', poster: '/media/video/bolt-loop.webp', landscape: true },
-  { type: 'image', category: 'Ad Creatives', title: 'Bolt feature callouts', client: 'iBlockCube', src: '/media/img/bolt-features.webp' },
-  { type: 'image', category: 'Ad Creatives', title: 'Bolt 170W & 205W launch ad', client: 'iBlockCube', src: '/media/img/bolt-variants.webp' },
-  { type: 'image', category: 'Ad Creatives', title: 'Bolt “Coming soon” teaser', client: 'iBlockCube', src: '/media/img/bolt-blue.webp' },
-  { type: 'image', category: 'Ad Creatives', title: 'Bolt “Launching soon” ad', client: 'iBlockCube', src: '/media/img/bolt-launching.webp' },
-  { type: 'video', category: 'Ad Creatives', title: 'Blueberry product ad mockup', client: 'Ad concept', src: '/media/video/ad-mockup-1.mp4', poster: '/media/video/ad-mockup-1.webp' },
-  { type: 'video', category: 'Ad Creatives', title: 'Cinematic brand ad mockup', client: 'Ad concept', src: '/media/video/ad-mockup-2.mp4', poster: '/media/video/ad-mockup-2.webp' },
-  { type: 'image', category: 'Ad Creatives', title: 'Customer results testimonial', client: 'E-commerce agency', src: '/media/img/testimonial-1.webp' },
-  { type: 'image', category: 'Ad Creatives', title: 'Store rebuild testimonial', client: 'E-commerce agency', src: '/media/img/testimonial-2.webp' },
-
-  { type: 'video', category: 'Video & Reels', title: 'Ave Tech: “Ever felt like…”', client: 'AI-edited reel', src: '/media/video/reel-avetech-1.mp4', poster: '/media/video/reel-avetech-1.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Ave Tech: “What if…”', client: 'AI-edited reel', src: '/media/video/reel-avetech-2.mp4', poster: '/media/video/reel-avetech-2.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Ave Tech: “The missing memory”', client: 'AI-edited reel', src: '/media/video/reel-avetech-3.mp4', poster: '/media/video/reel-avetech-3.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Ave Tech: explainer reel', client: 'AI-edited reel', src: '/media/video/reel-avetech-4.mp4', poster: '/media/video/reel-avetech-4.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Mighty Techie: vibe coding', client: 'Creator reel', src: '/media/video/reel-mightytechie-1.mp4', poster: '/media/video/reel-mightytechie-1.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Mighty Techie: design with Claude Code', client: 'Creator reel', src: '/media/video/reel-mightytechie-2.mp4', poster: '/media/video/reel-mightytechie-2.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Blueberry Smoothie animation', client: 'Motion graphics', src: '/media/video/anim-blueberry.mp4', poster: '/media/video/anim-blueberry.webp' },
-  { type: 'video', category: 'Video & Reels', title: 'Fresh Juice animation', client: 'Motion graphics', src: '/media/video/anim-fresh.mp4', poster: '/media/video/anim-fresh.webp' },
-
-  { type: 'image', category: 'Social Media', title: 'Virtual Assistant services post', client: 'Jomoteam', src: '/media/img/social-02.webp' },
-  { type: 'image', category: 'Social Media', title: '“Changing your opinion” post', client: 'Jomoteam', src: '/media/img/social-01.webp' },
-  { type: 'image', category: 'Social Media', title: 'When to hire a VA', client: 'Jomoteam', src: '/media/img/social-03.webp' },
-  { type: 'image', category: 'Social Media', title: 'Build your dream business', client: 'Jomoteam', src: '/media/img/social-05.webp' },
-  { type: 'image', category: 'Social Media', title: 'Benefits of hiring a VA', client: 'Jomoteam', src: '/media/img/social-07.webp' },
-  { type: 'image', category: 'Social Media', title: 'VA services overview', client: 'Jomoteam', src: '/media/img/social-08.webp' },
-  { type: 'image', category: 'Social Media', title: 'Social post template', client: 'Jomoteam', src: '/media/img/social-04.webp' },
-  { type: 'image', category: 'Social Media', title: 'Social post template', client: 'Jomoteam', src: '/media/img/social-06.webp' },
-  { type: 'image', category: 'Social Media', title: 'Social post template', client: 'Jomoteam', src: '/media/img/social-09.webp' },
-
-  { type: 'image', category: 'Branding', title: 'BizBear logo', client: 'Digital marketing agency', src: '/media/img/logo-bizbear.webp' },
-  { type: 'image', category: 'Branding', title: 'Tala Pet Shop signage mockup', client: 'Tala Pet Shop', src: '/media/img/tala-sign.webp' },
-  { type: 'image', category: 'Branding', title: 'Tala Pet Shop apparel mockup', client: 'Tala Pet Shop', src: '/media/img/tala-646.webp' },
-  { type: 'image', category: 'Branding', title: 'Tala Pet Shop logo', client: 'Tala Pet Shop', src: '/media/img/tala-603.webp', light: true },
-  { type: 'image', category: 'Branding', title: 'DynoRank logo', client: 'SEO brand', src: '/media/img/logo-597.webp', light: true },
-  { type: 'image', category: 'Branding', title: 'Lorytea logo', client: 'Milk tea brand', src: '/media/img/logo-198.webp', light: true },
-
-  { type: 'image', category: 'Print', title: 'Coffee Talk event poster', client: 'Event poster', src: '/media/img/poster-coffee.webp' },
-  { type: 'image', category: 'Print', title: 'Fashion Sale flyer', client: 'Retail promo', src: '/media/img/poster-fashion.webp' },
-  { type: 'image', category: 'Print', title: 'Pet Shop promo flyer', client: 'Tala Pet Shop', src: '/media/img/poster-petshop.webp' },
+export const workGroups = [
+  {
+    id: 'ai-reels',
+    title: 'AI Video Reels',
+    tool: 'AI voice, visuals & motion',
+    description: 'Short-form reels built with AI tools: scripted hooks, AI voiceovers and generated visuals, edited for retention on TikTok, Reels and Shorts.',
+    items: [
+      { ...v('ai-avenier-intro'), title: 'Avenier VA: brand intro', client: 'Personal brand' },
+      { ...v('reel-avetech-1'), title: 'Ave Tech: “Ever felt like…”', client: 'Ave Tech' },
+      { ...v('reel-avetech-2'), title: 'Ave Tech: “What if…”', client: 'Ave Tech' },
+      { ...v('reel-avetech-3'), title: 'Ave Tech: “The missing memory”', client: 'Ave Tech' },
+      { ...v('reel-avetech-4'), title: 'Ave Tech: explainer reel', client: 'Ave Tech' },
+      { ...v('reel-mightytechie-1'), title: 'Mighty Techie: vibe coding', client: 'Mighty Techie' },
+      { ...v('reel-mightytechie-2'), title: 'Mighty Techie: design with Claude Code', client: 'Mighty Techie' },
+    ],
+  },
+  {
+    id: 'capcut-reels',
+    title: 'CapCut Reels',
+    tool: 'Edited in CapCut',
+    description: 'Reels edited in CapCut for a dental clinic and a fitness creator: bilingual captions, animated titles, B-roll and graphics that keep viewers watching.',
+    items: [
+      { ...v('capcut-dental-myths'), title: 'Dental clinic: “5 Dental Myths”', client: 'Dental clinic' },
+      { ...v('capcut-dental-5-things'), title: 'Dental clinic: habits that damage your teeth', client: 'Dental clinic' },
+      { ...v('capcut-dental-braces-extraction'), title: 'Dental clinic: braces & tooth extraction', client: 'Dental clinic' },
+      { ...v('capcut-dental-bite-braces'), title: 'Dental clinic: bite problems & braces', client: 'Dental clinic' },
+      { ...v('capcut-fitness'), title: 'Fitness coach reel', client: 'Fitness creator' },
+      { ...v('capcut-10-vs-100'), title: '$10 edit vs $100 edit', client: 'Editing showcase' },
+    ],
+  },
+  {
+    id: 'kickstarter',
+    title: 'Kickstarter Ad Creatives',
+    tool: 'Crowdfunding campaign',
+    description: 'Pre-launch, launch and feature creatives for the iBlockCube Bolt travel adapter, a campaign that raised HK$808K (8,083% funded).',
+    items: [
+      { ...img('bolt-prelaunch'), title: 'Bolt 205W pre-launch ad', client: 'iBlockCube' },
+      { ...v('bolt-loop'), title: 'Bolt 205W product loop', client: 'iBlockCube', landscape: true },
+      { ...img('bolt-features'), title: 'Bolt feature callouts', client: 'iBlockCube' },
+      { ...img('bolt-variants'), title: 'Bolt 170W & 205W launch ad', client: 'iBlockCube' },
+      { ...img('bolt-blue'), title: 'Bolt “Coming soon” teaser', client: 'iBlockCube' },
+      { ...img('bolt-launching'), title: 'Bolt “Launching soon” ad', client: 'iBlockCube' },
+    ],
+  },
+  {
+    id: 'ai-mockups',
+    title: 'Mock-up & AI Product Videos',
+    tool: 'AI video generation',
+    description: 'AI-generated product ads and motion mock-ups that show how a brand’s product could look in a scroll-stopping campaign.',
+    items: [
+      { ...v('ad-mockup-1'), title: 'Blueberry product ad', client: 'Ad concept' },
+      { ...v('ad-mockup-2'), title: 'Cinematic brand ad', client: 'Ad concept' },
+      { ...v('anim-blueberry'), title: 'Blueberry Smoothie animation', client: 'Product animation' },
+      { ...v('anim-fresh'), title: 'Fresh Juice animation', client: 'Product animation' },
+    ],
+  },
+  {
+    id: 'graphics',
+    title: 'Graphic Design',
+    tool: 'Canva · Illustrator · Figma',
+    description: 'Social media posts, testimonial graphics and promotional posters designed to match each brand and drive engagement.',
+    items: [
+      { ...img('social-02'), title: 'Virtual Assistant services post', client: 'Jomoteam' },
+      { ...img('social-01'), title: '“Changing your opinion” post', client: 'Jomoteam' },
+      { ...img('social-03'), title: 'When to hire a VA', client: 'Jomoteam' },
+      { ...img('social-05'), title: 'Build your dream business', client: 'Jomoteam' },
+      { ...img('social-07'), title: 'Benefits of hiring a VA', client: 'Jomoteam' },
+      { ...img('social-08'), title: 'VA services overview', client: 'Jomoteam' },
+      { ...img('testimonial-1'), title: 'Customer results testimonial', client: 'E-commerce agency' },
+      { ...img('testimonial-2'), title: 'Store rebuild testimonial', client: 'E-commerce agency' },
+      { ...img('social-04'), title: 'Social post design', client: 'Jomoteam' },
+      { ...img('social-06'), title: 'Social post design', client: 'Jomoteam' },
+      { ...img('social-09'), title: 'Social post design', client: 'Jomoteam' },
+      { ...img('poster-coffee'), title: 'Coffee Talk event poster', client: 'Event poster' },
+      { ...img('poster-fashion'), title: 'Fashion Sale flyer', client: 'Retail promo' },
+      { ...img('poster-petshop'), title: 'Pet Shop promo flyer', client: 'Tala Pet Shop' },
+    ],
+  },
+  {
+    id: 'branding',
+    title: 'Logos & Branding',
+    tool: 'Brand identity',
+    description: 'Logos and brand mock-ups for agencies, creators and small businesses.',
+    items: [
+      { ...img('logo-bizbear'), title: 'BizBear logo', client: 'Digital marketing agency', dark: true },
+      { ...img('logo-mighty-techie'), title: 'Mighty Techie logo', client: 'Tech creator studio', light: true },
+      { ...img('logo-omirank'), title: 'Omirank logo', client: 'SEO brand', light: true },
+      { ...img('logo-tech-hq'), title: 'Tech Entrepreneur HQ logo', client: 'Tech community', light: true },
+      { ...img('logo-ecommerce-builder'), title: 'E-commerce Website Builder logo', client: 'Web builder brand', dark: true },
+      { ...img('logo-airchy'), title: 'Airchy logo', client: 'Wordmark', dark: true },
+      { ...img('logo-597'), title: 'DynoRank logo', client: 'SEO brand', light: true },
+      { ...img('logo-198'), title: 'Lorytea logo', client: 'Milk tea brand', light: true },
+      { ...img('tala-sign'), title: 'Tala Pet Shop signage mockup', client: 'Tala Pet Shop' },
+      { ...img('tala-646'), title: 'Tala Pet Shop apparel mockup', client: 'Tala Pet Shop' },
+      { ...img('tala-603'), title: 'Tala Pet Shop logo', client: 'Tala Pet Shop', light: true },
+    ],
+  },
 ]
+
+export const workCount = workGroups.reduce((n, g) => n + g.items.length, 0)
 
 export const certifications = [
   { title: 'Masterclass Virtual Assistant (MVA)', issuer: 'Surge Marketplace', date: 'May 2024', note: '40-hour program', src: '/media/img/cert-mva.webp' },

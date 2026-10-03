@@ -1,6 +1,6 @@
 // Free, offline answers for the chat widget (used when the AI assistant is disabled).
 // Each topic matches on keywords; the best match wins. Edit answers here like any other site copy.
-import { profile } from './content.js'
+import { profile, workCount } from './content.js'
 
 const book = { label: 'Book a strategy call', href: '#book' }
 const whatsapp = { label: 'WhatsApp Avenier', href: profile.whatsapp, external: true }
@@ -26,10 +26,15 @@ export const topics = [
   {
     id: 'work',
     label: 'Can I see your work?',
-    keywords: ['portfolio', 'work', 'sample', 'example', 'video', 'reel', 'design', 'logo', 'graphic', 'creative'],
+    keywords: ['portfolio', 'work', 'sample', 'example', 'video', 'reel', 'design', 'logo', 'graphic', 'creative', 'capcut', 'mock'],
     answer:
-      'Sure! The portfolio has 36 pieces: Kickstarter ad creatives, AI-edited reels, product animations, social media posts, logos and posters. Use the filters to jump to a category.',
-    actions: [{ label: 'View portfolio', href: '#work' }],
+      `Sure! The portfolio has ${workCount} pieces in six sections: AI Video Reels, CapCut Reels, Kickstarter Ad Creatives, Mock-up & AI Product Videos, Graphic Design, and Logos & Branding.`,
+    actions: [
+      { label: 'AI reels', href: '#work-ai-reels' },
+      { label: 'CapCut & dental reels', href: '#work-capcut-reels' },
+      { label: 'Kickstarter ads', href: '#work-kickstarter' },
+      { label: 'All work', href: '#work' },
+    ],
   },
   {
     id: 'ecommerce',
