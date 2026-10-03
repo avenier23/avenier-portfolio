@@ -11,7 +11,6 @@ export const profile = {
   whatsappDisplay: '+63 995 497 3679',
   resume: '/Avenier-Arellano-Resume.pdf',
   logo: '/media/img/ave-logo-mark.png',
-  introVideo: { src: '/media/video/ai-avenier-intro.mp4', poster: '/media/video/ai-avenier-intro.webp' },
   timezones: 'US (EST/PST) · UK (GMT) · AU (AEST)',
 }
 

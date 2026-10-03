@@ -1,51 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import { MapPin, Clock, FileDown, Languages, Volume2, VolumeX } from 'lucide-react'
+import { MapPin, Clock, FileDown, Languages } from 'lucide-react'
 import Reveal from './Reveal'
 import { about, profile } from '../data/content'
 import './About.css'
-
-// Muted, looping brand intro; starts when scrolled into view (never for reduced-motion users).
-function IntroVideo() {
-  const ref = useRef(null)
-  const [muted, setMuted] = useState(true)
-
-  useEffect(() => {
-    const video = ref.current
-    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const observer = new IntersectionObserver(([e]) => (e.isIntersecting ? video.play().catch(() => {}) : video.pause()), {
-      threshold: 0.4,
-    })
-    observer.observe(video)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <figure className="about__intro">
-      <video
-        ref={ref}
-        src={profile.introVideo.src}
-        poster={profile.introVideo.poster}
-        muted={muted}
-        loop
-        playsInline
-        controls={!muted}
-        preload="metadata"
-        aria-label="Avenier’s 18-second brand intro video"
-      />
-      <button
-        className="about__sound"
-        onClick={() => {
-          setMuted((m) => !m)
-          ref.current?.play().catch(() => {})
-        }}
-        aria-label={muted ? 'Play intro with sound' : 'Mute intro'}
-      >
-        {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-      </button>
-      <figcaption>My 18-sec intro</figcaption>
-    </figure>
-  )
-}
 
 export default function About() {
   return (
@@ -60,7 +16,6 @@ export default function About() {
             height="900"
             loading="lazy"
           />
-          <IntroVideo />
           <ul className="about__facts card">
             <li>
               <MapPin size={16} aria-hidden="true" /> {profile.location}
