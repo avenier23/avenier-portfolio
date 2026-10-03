@@ -28,7 +28,7 @@ export const topics = [
     label: 'Can I see your work?',
     keywords: ['portfolio', 'work', 'sample', 'example', 'video', 'reel', 'design', 'logo', 'graphic', 'creative', 'capcut', 'mock'],
     answer:
-      `Sure! The portfolio has ${workCount} pieces in six sections: AI Video Reels, CapCut Reels, Kickstarter Ad Creatives, Mock-up & AI Product Videos, Graphic Design, and Logos & Branding.`,
+      `Sure! The portfolio has ${workCount} pieces in six sections: AI Video Reels, CapCut Reels, Kickstarter Ad Creatives, Mock-up & AI Product Videos, Graphic Design, and Brands I’ve Worked With.`,
     actions: [
       { label: 'AI reels', href: '#work-ai-reels' },
       { label: 'CapCut & dental reels', href: '#work-capcut-reels' },

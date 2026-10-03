@@ -7,7 +7,7 @@ export default function Brands() {
   return (
     <section className="brands" aria-label="Brands and tools I work with">
       <div className="container">
-        <p className="brands__label">Brands I’ve created for</p>
+        <p className="brands__label">Brands I’ve worked with</p>
         <ul className="brands__logos">
           {brands.map((b) => (
             <li key={b.name} className={`brands__logo ${b.dark ? 'is-dark' : ''}`}>
