@@ -9,9 +9,9 @@ import './Work.css'
 const INITIAL = 8
 
 export default function Work() {
-  // { group: index into workGroups, index: item index } of the piece open in the viewer
+  // { items: the list being browsed (a group, or one style of it), index } of the piece open in the viewer
   const [open, setOpen] = useState(null)
-  const items = open ? workGroups[open.group].items : []
+  const items = open ? open.items : []
 
   const navigate = useCallback(
     (d) => setOpen((o) => ({ ...o, index: (o.index + d + items.length) % items.length })),
@@ -41,8 +41,8 @@ export default function Work() {
           ))}
         </nav>
 
-        {workGroups.map((g, gi) => (
-          <WorkGroup key={g.id} group={g} onOpen={(index) => setOpen({ group: gi, index })} />
+        {workGroups.map((g) => (
+          <WorkGroup key={g.id} group={g} onOpen={(list, index) => setOpen({ items: list, index })} />
         ))}
       </div>
 
@@ -53,7 +53,9 @@ export default function Work() {
 
 function WorkGroup({ group, onOpen }) {
   const [showAll, setShowAll] = useState(false)
-  const visible = showAll ? group.items : group.items.slice(0, INITIAL)
+  const [style, setStyle] = useState(null)
+  const list = style ? group.items.filter((item) => item.style === style) : group.items
+  const visible = showAll ? list : list.slice(0, INITIAL)
   const headingId = `work-${group.id}-title`
 
   return (
@@ -68,6 +70,24 @@ function WorkGroup({ group, onOpen }) {
         <p>{group.description}</p>
       </Reveal>
 
+      {group.styles && (
+        <div className="work__filters" role="group" aria-label={`Filter ${group.title} by style`}>
+          {[null, ...group.styles].map((s) => (
+            <button
+              key={s ?? 'all'}
+              className="work__filter"
+              aria-pressed={style === s}
+              onClick={() => {
+                setStyle(s)
+                setShowAll(false)
+              }}
+            >
+              {s ?? 'All'} <small>{s ? group.items.filter((item) => item.style === s).length : group.items.length}</small>
+            </button>
+          ))}
+        </div>
+      )}
+
       <ul className="work__grid">
         {visible.map((item, i) => (
           <motion.li
@@ -76,9 +96,9 @@ function WorkGroup({ group, onOpen }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', stiffness: 220, damping: 26, delay: (i % 4) * 0.04 }}
-            className={`work__item ${item.type === 'video' && !item.landscape ? 'is-tall' : ''}`}
+            className={`work__item ${(item.type === 'video' && !item.landscape) || item.tall ? 'is-tall' : ''}`}
           >
-            <button className="work__card" onClick={() => onOpen(i)}>
+            <button className="work__card" onClick={() => onOpen(list, i)}>
               <span className={`work__media ${item.light ? 'is-light' : ''} ${item.dark ? 'is-dark' : ''}`}>
                 <img src={item.type === 'video' ? item.poster : item.src} alt="" loading="lazy" />
                 <span className="work__badge" aria-hidden="true">
@@ -96,10 +116,10 @@ function WorkGroup({ group, onOpen }) {
         ))}
       </ul>
 
-      {group.items.length > INITIAL && (
+      {list.length > INITIAL && (
         <div className="work__more">
           <button className="btn btn-ghost" onClick={() => setShowAll((s) => !s)} aria-expanded={showAll}>
-            {showAll ? 'Show less' : `Show all ${group.items.length} in ${group.title}`}
+            {showAll ? 'Show less' : `Show all ${list.length} in ${style ?? group.title}`}
           </button>
         </div>
       )}

@@ -169,6 +169,7 @@ export const tools = [
 
 // Portfolio, organized into sections. Each item: type 'image' | 'video'.
 // Videos use a .webp poster generated from the clip; `landscape` marks wide videos; `light` puts logos on white.
+// `tall` shows a portrait image at full height; a group with `styles` gets filter tabs keyed on each item's `style`.
 const v = (name) => ({ type: 'video', src: `/media/video/${name}.mp4`, poster: `/media/video/${name}.webp` })
 const img = (name) => ({ type: 'image', src: `/media/img/${name}.webp` })
 
@@ -250,6 +251,65 @@ export const workGroups = [
       { ...img('poster-petshop'), title: 'Pet Shop promo flyer', client: 'Tala Pet Shop' },
       { ...img('tala-sign'), title: 'Tala Pet Shop signage mockup', client: 'Tala Pet Shop' },
       { ...img('tala-646'), title: 'Tala Pet Shop apparel mockup', client: 'Tala Pet Shop' },
+    ],
+  },
+  {
+    id: 'design-styles',
+    title: 'Graphic Design Styles',
+    tool: '10 design styles',
+    description: 'Posters, ads and magazine covers exploring ten graphic design styles, four of each, from minimalism and editorial layouts to Y2K, pixel art and graffiti. Filter by style below.',
+    styles: ['Minimalism', 'Collage Art', 'Retro', 'Clay Style', 'Pixel Art', 'Editorial', 'Y2K', 'Surreal Design', 'Bohemian', 'Graffiti'],
+    items: [
+      // Minimalism
+      { ...img('gd-geometric-form-representing-tech'), title: '“Digital Future” geometric poster', client: 'Minimalism', style: 'Minimalism', tall: true },
+      { ...img('gd-human-silhouette-and-artificial'), title: '“Human + AI” poster', client: 'Minimalism', style: 'Minimalism', tall: true },
+      { ...img('gd-minimalist-graphic-design-compos'), title: '“Less Is More” poster', client: 'Minimalism', style: 'Minimalism', tall: true },
+      { ...img('gd-minimalist-graphic-with-small-su'), title: '“Focus. Simplicity. Precision.” ad', client: 'Minimalism', style: 'Minimalism', tall: true },
+      // Collage Art
+      { ...img('gd-artistic-collage-of-creative-mind'), title: '“The Creative Mind” collage', client: 'Collage Art', style: 'Collage Art', tall: true },
+      { ...img('gd-digital-chaos-experimental-colla-3'), title: '“Digital Chaos” experimental poster', client: 'Collage Art', style: 'Collage Art', tall: true },
+      { ...img('gd-futuristic-collage-art-poster-3'), title: '“The Future” experimental art direction', client: 'Collage Art', style: 'Collage Art', tall: true },
+      { ...img('gd-human-portrait-mixed-media-collage'), title: '“Human vs Machine” collage', client: 'Collage Art', style: 'Collage Art', tall: true },
+      // Retro
+      { ...img('gd-retro-futuristic-poster-with-fut'), title: '“Future From the Past” poster', client: 'Retro', style: 'Retro', tall: true },
+      { ...img('gd-retro-poster-of-digital-revolution'), title: '“The Digital Revolution” 90s poster', client: 'Retro', style: 'Retro', tall: true },
+      { ...img('gd-retro-technology-graphic-poster'), title: '“Personal Computing Is Here!” poster', client: 'Retro', style: 'Retro', tall: true },
+      { ...img('gd-vintage-creative-workspace-graphic'), title: '“Creative Studio” 70s poster', client: 'Retro', style: 'Retro', tall: true },
+      // Clay Style
+      { ...img('gd-clay-brain-surrounded-by-objects'), title: '“Creative Brain” clay poster', client: 'Clay Style', style: 'Clay Style', tall: true },
+      { ...img('gd-clay-illustration-of-business-gr'), title: 'Clay business growth town', client: 'Clay Style', style: 'Clay Style', tall: true },
+      { ...img('gd-clay-robot-connecting-gears'), title: '“Business Automation” clay robot', client: 'Clay Style', style: 'Clay Style', tall: true },
+      { ...img('gd-clay-robot-interacting-with-comp'), title: 'Clay AI assistant robot', client: 'Clay Style', style: 'Clay Style', tall: true },
+      // Pixel Art
+      { ...img('gd-entrepreneur-working-at-computer'), title: '“The Pixel” workspace scene', client: 'Pixel Art', style: 'Pixel Art', tall: true },
+      { ...img('gd-futuristic-pixel-art-city'), title: 'Neo-Kyoto pixel city', client: 'Pixel Art', style: 'Pixel Art', tall: true },
+      { ...img('gd-pixel-character-climbing-busines'), title: '“Level Up Your Business” pixel poster', client: 'Pixel Art', style: 'Pixel Art', tall: true },
+      { ...img('gd-pixel-character-viewing-automati'), title: '“Automation Quest” map', client: 'Pixel Art', style: 'Pixel Art', tall: true },
+      // Editorial
+      { ...img('gd-ai-revolution-magazine-cover'), title: '“AI Revolution” magazine cover', client: 'Editorial', style: 'Editorial', tall: true },
+      { ...img('gd-ai-revolution-magazine-cover-design'), title: '“Forward: AI Revolution” cover', client: 'Editorial', style: 'Editorial', tall: true },
+      { ...img('gd-digital-entrepreneur-luxury-edit'), title: '“Digital Entrepreneur Visionary” cover', client: 'Editorial', style: 'Editorial', tall: true },
+      { ...img('gd-human-interacting-with-advanced'), title: '“The Future of Work” cover', client: 'Editorial', style: 'Editorial', tall: true },
+      // Y2K
+      { ...img('gd-ai-advertisement-with-robot-elem'), title: '“AI 2000: The Future Is Now” ad', client: 'Y2K', style: 'Y2K', tall: true },
+      { ...img('gd-creator-surrounded-by-y2k-techno'), title: '“Cyber Lifestyle” Y2K poster', client: 'Y2K', style: 'Y2K', tall: true },
+      { ...img('gd-digital-dream-graphic'), title: '“Digital Dream” interface poster', client: 'Y2K', style: 'Y2K', tall: true },
+      { ...img('gd-y2k-futuristic-digital-graphic-d'), title: '“Digital Dream” glass UI poster', client: 'Y2K', style: 'Y2K', tall: true },
+      // Surreal Design
+      { ...img('gd-brain-transformed-into-futuristi'), title: '“AI Brain: The Universe Within”', client: 'Surreal Design', style: 'Surreal Design', tall: true },
+      { ...img('gd-giant-head-generating-architectu'), title: '“Infinite Ideas” poster', client: 'Surreal Design', style: 'Surreal Design', tall: true },
+      { ...img('gd-human-hand-reaching-for-machine'), title: 'Human hand reaching for machine', client: 'Surreal Design', style: 'Surreal Design', tall: true },
+      { ...img('gd-office-desk-growing-into-skyscra'), title: 'Office desk growing into skyscrapers', client: 'Surreal Design', style: 'Surreal Design', tall: true },
+      // Bohemian
+      { ...img('gd-artistic-bohemian-poster-design'), title: '“Creativity: Embrace the Flow” poster', client: 'Bohemian', style: 'Bohemian', tall: true },
+      { ...img('gd-bohemian-graphic-with-dried-flowers'), title: '“Sophisticated Bohemian” dried flowers', client: 'Bohemian', style: 'Bohemian', tall: true },
+      { ...img('gd-digital-nomad-creative-workspace'), title: 'Bohemian creative workspace', client: 'Bohemian', style: 'Bohemian', tall: true },
+      { ...img('gd-person-surrounded-by-flowing-fabric'), title: '“Freedom: Embrace the Wild Soul”', client: 'Bohemian', style: 'Bohemian', tall: true },
+      // Graffiti
+      { ...img('gd-character-climbing-digital-maze'), title: '“Hustle” street-art staircase', client: 'Graffiti', style: 'Graffiti', tall: true },
+      { ...img('gd-futuristic-graffiti-mural-depict'), title: '“The Future of Technology” mural', client: 'Graffiti', style: 'Graffiti', tall: true },
+      { ...img('gd-graffiti-poster-breaking-rules'), title: '“Break the Rules” wall poster', client: 'Graffiti', style: 'Graffiti', tall: true },
+      { ...img('gd-graffiti-poster-on-concrete-wall'), title: '“Rebellious Creative Energy” wall', client: 'Graffiti', style: 'Graffiti', tall: true },
     ],
   },
   {
